@@ -1,8 +1,10 @@
 const express = require('express');
 const { default: mongoose } = require('mongoose');
+const TodoRouter = require('./routes/TodoRouter');
 const app = express();
 
 require("dotenv").config();
+app.use(express.json())
 const PORT = process.env.PORT || 5000;
 const { MONGO_URI } = process.env;
 
@@ -13,3 +15,5 @@ mongoose
             console.log(`The database was connected sucessfully\nThe Server was running in: http://localhost:${PORT}`);
         })
     }).catch ((e) => console.log(e.message));
+
+app.use('/api/todo', TodoRouter);

@@ -9,4 +9,4 @@ const TodoModels = new Schema (
     }, { timestamps: true }
 );
 
-module.exports = mongoose.model('TodoModels', TodoModels, todos);
+module.exports = mongoose.model('TodoModels', TodoModels, "todos");

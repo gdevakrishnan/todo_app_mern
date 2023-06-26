@@ -9,7 +9,7 @@ const createTodo = async (req, res) => {
         const task = await TodoModels.create({ todo });
         res.status(200).json(task);
     } catch (e) {
-        res.status(400).json({error: e.message});
+        res.status(400).json({ error: e.message });
     }
 }
 
@@ -18,8 +18,8 @@ const readTodos = async (req, res) => {
     try {
         const task = await TodoModels.find({});
         res.status(200).json(task);
-    }   catch (e) {
-        res.status(400).json({error: e.message});
+    } catch (e) {
+        res.status(400).json({ error: e.message });
     }
 }
 
@@ -27,15 +27,34 @@ const readTodos = async (req, res) => {
 const readTodo = async (req, res) => {
     const { id } = req.params;
     if (!(mongoose.Types.ObjectId.isValid(id))) {
-        return res.status(404).json({message: "Todo Not Found"});
+        return res.status(404).json({ message: "Todo Not Found" });
     }
 
     try {
         const task = await TodoModels.findById(id);
         res.status(200).json(task);
-    }   catch (e) {
-        res.status(400).json({message: "Error Found"});
+    } catch (e) {
+        res.status(400).json({ message: "Error Found" });
     }
 }
 
-module.exports = { createTodo, readTodos, readTodo }
+// Update a todo by Id - PATCH
+const updateTodo = async (req, res) => {
+    const { id } = req.params;
+    if (!(mongoose.Types.ObjectId.isValid(id))) {
+        return res.status(404).json({ message: "Todo Not Found" });
+    }
+
+    try {
+        const task = await TodoModels.findByIdAndUpdate({
+            _id: id
+        }, {
+            ...req.body
+        })
+        res.status(200).json(task);
+    }   catch (e) {
+        res.status(400).json({error: e.message});
+    }
+}
+
+module.exports = { createTodo, readTodos, readTodo, updateTodo }

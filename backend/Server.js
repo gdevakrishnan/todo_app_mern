@@ -2,9 +2,12 @@ const express = require('express');
 const { default: mongoose } = require('mongoose');
 const TodoRouter = require('./routes/TodoRouter');
 const app = express();
+const cors = require('cors');
 
 require("dotenv").config();
 app.use(express.json())
+app.use(cors());
+
 const PORT = process.env.PORT || 5000;
 const { MONGO_URI } = process.env;
 

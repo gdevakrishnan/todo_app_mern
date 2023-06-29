@@ -31,6 +31,7 @@ footer .credits .company {
     background-color: var(--main);
     padding: 20px 30px;
     display: flex;
+    gap: 20px;
     justify-content: space-between  ;
     border-radius: 5px;
     margin-bottom: 20px;

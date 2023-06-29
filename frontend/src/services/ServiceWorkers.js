@@ -27,3 +27,12 @@ export const deleteTodo = async (id) => {
         console.log(e.message);
     }
 }
+
+export const patchTodo = async (id, JsonData) => {
+    try {
+        const response = await axios.patch(`${BASE_URL}/${id}`, JsonData);
+        return response;
+    }   catch (e) {
+        console.log(e.message);
+    }
+}

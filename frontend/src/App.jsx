@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getTodo, addTodo, deleteTodo } from "./services/ServiceWorkers"
+import { getTodo, addTodo, deleteTodo, patchTodo } from "./services/ServiceWorkers"
 function App() {
   const [Todos, setTodos] = useState(null);
   const [Atodo, setAtodo] = useState("");
@@ -25,6 +25,22 @@ function App() {
 
   const handleDelete = (id) => {
     deleteTodo(id);
+  }
+
+  const handleEdit = (id) => {
+    const filteredData = Todos.filter((JsonTodoData) => JsonTodoData._id == id);
+    const { todo } = filteredData[0];
+    setAtodo(todo);
+    deleteTodo(id);
+  }
+
+  const handleStatus = (id) => {
+    Todos.map((JsonTodoData) => {
+      if (JsonTodoData._id == id) {
+        const {todo, status} = JsonTodoData;
+        patchTodo(id, {todo, status: !(status)});
+      }
+    })
   }
 
   const Template = Todos ? Todos.map((atodo) => {

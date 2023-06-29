@@ -9,7 +9,6 @@ const TodoModels = new Schema (
         status: {
             type: Boolean,
             default: false,
-            require: true
         }
     }, { timestamps: true }
 );
